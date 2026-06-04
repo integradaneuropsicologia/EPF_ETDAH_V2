@@ -1200,6 +1200,11 @@ function interpretByCutoffs(score, cutoffs) {
   return null;
 }
 
+function roundNumericResult(value, decimals = 2) {
+  const numberValue = Number(value);
+  return Number.isFinite(numberValue) ? Number(numberValue.toFixed(decimals)) : 0;
+}
+
     /**************************************************************
      * VALIDAÇÃO PRINCIPAL
      **************************************************************/
@@ -1947,7 +1952,7 @@ Object.entries(INDICATORS_CONFIG).forEach(([key, cfg]) => {
     order: metaOrder++,
     key,
     label: cfg.label || key,
-    value: indicator.sum
+    value: roundNumericResult(indicator.sum)
   });
 
   if (Array.isArray(cfg?.cutoffs) && cfg.cutoffs.length) {
